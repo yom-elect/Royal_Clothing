@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { signInWithGoogle } from "../../firebase/firebase.utils";
+import { signInWithGoogle, auth } from "../../firebase/firebase.utils";
 
 import "./sign-in.styles.scss";
 
@@ -12,13 +12,19 @@ const SignIn = () => {
     password: "",
   });
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    setUserInfo({
-      email: "",
-      password: "",
-    });
+    const { email, password } = userInfo;
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      setUserInfo({
+        email: "",
+        password: "",
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleChange = (event) => {
