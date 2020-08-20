@@ -8,7 +8,7 @@ const CheckoutPage = () => {
   const { cartItems, total } = useSelector(({ cart: { cartItems } }) => ({
     total: cartItems.reduce(
       (accumulatedQuantity, cartItem) =>
-        (accumulatedQuantity + cartItem.quantity) * cartItem.price,
+        accumulatedQuantity + cartItem.quantity * cartItem.price,
       0
     ),
     cartItems,
