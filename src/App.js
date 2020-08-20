@@ -7,6 +7,8 @@ import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
 import AuthenticationPage from "./pages/Authentication/authentication.component";
+import CheckoutPage from "./pages/checkout/checkout.component";
+
 import Header from "./components/header/header.component";
 
 // state actions
@@ -51,6 +53,7 @@ function App() {
             currentUser ? <Redirect to="/" /> : <AuthenticationPage />
           }
         />
+        <Route exact path="/checkout" component={CheckoutPage} />
       </Switch>
     </div>
   );
