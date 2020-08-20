@@ -1,14 +1,21 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { auth } from "../../firebase/firebase.utils";
 
 import { ReactComponent as Logo } from "../../assets/crown.svg";
+import CartIcon from "../cart-icon/cart-icon.component";
+import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 
 import "./header.styles.scss";
 
 const Header = () => {
-  const currentUser = useSelector((state) => state.user.currentUser);
+  const { currentUser, hidden } = useSelector(
+    ({ user: { currentUser }, cart: { hidden } }) => ({
+      currentUser,
+      hidden,
+    })
+  );
 
   return (
     <div className="header">
@@ -31,7 +38,9 @@ const Header = () => {
             SIGN IN
           </Link>
         )}
+        <CartIcon />
       </div>
+      {!hidden && <CartDropdown />}
     </div>
   );
 };
