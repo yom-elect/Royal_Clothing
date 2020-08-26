@@ -19,8 +19,7 @@ function App() {
   const currentUser = useSelector((state) => state.user.currentUser);
 
   useEffect(() => {
-    let unsubscribeFromAuth;
-    unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+    const unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
         userRef.onSnapshot((snapShot) => {
@@ -36,7 +35,7 @@ function App() {
     });
 
     return function cleanup() {
-      unsubscribeFromAuth = null;
+      unsubscribeFromAuth();
     };
   }, [dispatch]);
 
