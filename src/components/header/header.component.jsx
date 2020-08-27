@@ -1,11 +1,15 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useContext, useState } from "react";
+//import { useSelector } from "react-redux";
 // import { Link } from "react-router-dom";
 import { auth } from "../../firebase/firebase.utils";
 
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
+
+import CurrentUserContext from "../../contexts/current-user/current-user.context";
+//import CartContext from "../../contexts/cart/cart.context";
+import { CartContext } from "../../providers/cart/cart.provider";
 
 import {
   HeaderContainer,
@@ -17,12 +21,11 @@ import {
 import "./header.styles.scss";
 
 const Header = () => {
-  const { currentUser, hidden } = useSelector(
-    ({ user: { currentUser }, cart: { hidden } }) => ({
-      currentUser,
-      hidden,
-    })
-  );
+  // const { hidden } = useSelector(({ cart: { hidden } }) => ({
+  //   hidden,
+  // }));
+  const { hidden } = useContext(CartContext);
+  const currentUser = useContext(CurrentUserContext);
 
   return (
     // <div className="header">

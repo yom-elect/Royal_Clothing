@@ -1,18 +1,17 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useContext } from "react";
+// import { useSelector } from "react-redux";
 
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
+import { CartContext } from "../../providers/cart/cart.provider";
 import "./checkout.styles.scss";
 
 const CheckoutPage = () => {
-  const { cartItems, total } = useSelector(({ cart: { cartItems } }) => ({
-    total: cartItems.reduce(
-      (accumulatedQuantity, cartItem) =>
-        accumulatedQuantity + cartItem.quantity * cartItem.price,
-      0
-    ),
-    cartItems,
-  }));
+  const { cartItems } = useContext(CartContext);
+  const total = cartItems.reduce(
+    (accumulatedQuantity, cartItem) =>
+      accumulatedQuantity + cartItem.quantity * cartItem.price,
+    0
+  );
   return (
     <div className="checkout-page">
       <div className="checkout-header">
